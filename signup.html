@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - PakWorkerConnect</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-users text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800">PakWorker<span class="text-blue-600">Connect</span></h1>
+                </div>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
+                    <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Services</a>
+                    <a href="#order" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Order</a>
+                    <a href="#tracking" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Tracking</a>
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">About</a>
+                </nav>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="login.html">
+                    <button id="login-button" class="px-6 py-2 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-colors">
+                        Login
+                    </button>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sign Up Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-md mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Create Your Account</h2>
+                    <p class="text-xl text-gray-600">Join us to connect with professional workers across Pakistan.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <form id="signup-form" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                            <input type="text" class="w-full form-input py-3 px-4 rounded-lg focus:outline-none" placeholder="Enter your full name" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                            <input type="email" class="w-full form-input py-3 px-4 rounded-lg focus:outline-none" placeholder="Enter your email" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                            <input type="password" class="w-full form-input py-3 px-4 rounded-lg focus:outline-none" placeholder="Create a password" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                            <input type="password" class="w-full form-input py-3 px-4 rounded-lg focus:outline-none" placeholder="Confirm your password" required>
+                        </div>
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center">
+                                <i class="fas fa-user-plus mr-2"></i>
+                                Sign Up
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">PakWorkerConnect</h3>
+                    <p class="text-gray-400 mb-4">Connecting professional workers with customers across Pakistan for reliable and efficient service delivery.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Food Delivery</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Ride Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cleaning Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Repair Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Cities</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Karachi</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Islamabad</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Lahore</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Other Cities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+92 300 1234567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@pakworkerconnect.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Islamabad, Pakistan</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2023 PakWorkerConnect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Handle form submission
+        const signupForm = document.getElementById('signup-form');
+        if (signupForm) {
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Sign up successful! Welcome to PakWorkerConnect.');
+                signupForm.reset();
+            });
+        }
+    </script>
+</body>
+</html>

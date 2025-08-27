@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  /* style.css */
+body {
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+/* Light theme styles */
+body.light-theme {
+    background-color: white;
+    color: black;
+}
+
+/* Dark theme styles */
+body.dark-theme {
+    background-color: black;
+    color: white;
+}
+
+/* Optional: Style the toggle button */
+#theme-toggle {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* Smooth animations */
+.animate-in {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-delay-1 {
+    animation-delay: 0.2s;
+}
+
+.animate-delay-2 {
+    animation-delay: 0.4s;
+}
+
+.animate-delay-3 {
+    animation-delay: 0.6s;
+}
+
+.hover-scale {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Custom gradient backgrounds */
+.hero-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.service-card-gradient {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+}
+
+/* Map container styling */
+.map-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+.form-input {
+    transition: all 0.3s ease;
+    border: 2px solid #e2e8f0;
+}
+
+.form-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Loading animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 4px;
+}
+
+/* Mobile navigation */
+.mobile-nav {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.mobile-nav.open {
+    transform: translateX(0);
+}
+
+/* Success message styling */
+#success-message {
+    display: none; /* Initially hidden */
+}
+
+#success-message.hidden {
+    display: none;
+}
+
+#success-message:not(.hidden) {
+    display: block;
+}
+
+/* Button styling */
+button {
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Default Light Mode */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #222;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* Header Menu */
+header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  background: #f0f0f0;
+  transition: background 0.5s;
+}
+
+#themeToggle {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+}
+
+#themeToggle:hover {
+  transform: rotate(180deg);
+}
+
+/* Dark Mode */
+body.dark {
+  background: #121212;
+  color: #f0f0f0;
+}
+
+header.dark {
+  background: #1e1e1e;
+}
