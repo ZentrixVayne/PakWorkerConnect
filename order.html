@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Place Order - PakWorkerConnect</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    /* Dark Mode Styles */
+    .dark {
+      background-color: #111827; /* Tailwind gray-900 */
+      color: #f9fafb; /* Tailwind gray-50 */
+    }
+
+    .dark header {
+      background-color: #1f2937; /* Tailwind gray-800 */
+    }
+
+    .dark section {
+      background-color: #1f2937;
+      color: #f9fafb;
+    }
+
+    .dark footer {
+      background-color: #111827;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-color: #f9fafb;
+    }
+
+    /* Smooth animations */
+    .animate-in {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .animate-delay-1 {
+      animation-delay: 0.2s;
+    }
+
+    .hover-scale {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-scale:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Form styling */
+    .form-input {
+      transition: all 0.3s ease;
+      border: 2px solid #e2e8f0;
+    }
+
+    .form-input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      outline: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="bg-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center">
+        <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+          <i class="fas fa-users text-white text-xl"></i>
+        </div>
+        <h1 class="text-2xl font-bold text-gray-800">PakWorker<span class="text-blue-600">Connect</span></h1>
+      </div>
+
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
+        <a href="signup.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Sign Up</a>
+        <a href="login.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Order Form Section -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-md mx-auto">
+        <div class="text-center mb-12 animate-in">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Place Your Order</h2>
+          <p class="text-xl text-gray-600">
+            Fill out the form below to request workers or services
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-8 hover-scale animate-in animate-delay-1">
+          <form id="order-form" class="space-y-6" novalidate>
+            <div>
+              <label for="service-category" class="block text-sm font-medium text-gray-700 mb-2">Service Category</label>
+              <select id="service-category" name="service-category" class="w-full form-input py-3 px-4 rounded-lg" required>
+                <option value="" disabled selected>Select Category</option>
+                <option value="food">Food Delivery</option>
+                <option value="taxi">Ride Service</option>
+                <option value="cleaning">Cleaning Service</option>
+                <option value="repair">Repair Service</option>
+                <option value="other">Other Services</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">Quantity</label>
+              <input type="number" id="quantity" name="quantity" min="1" max="10" placeholder="Number of workers" class="w-full form-input py-3 px-4 rounded-lg" required />
+            </div>
+
+            <div>
+              <label for="full-name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+              <input type="text" id="full-name" name="full-name" placeholder="Enter your full name" class="w-full form-input py-3 px-4 rounded-lg" required />
+            </div>
+
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+92 XXX XXXXXX" pattern="^\+92\s?\d{3}\s?\d{7}$" class="w-full form-input py-3 px-4 rounded-lg" required />
+            </div>
+
+            <div>
+              <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Delivery Address</label>
+              <textarea id="address" name="address" rows="3" placeholder="Enter complete delivery address" class="w-full form-input py-3 px-4 rounded-lg" required></textarea>
+            </div>
+
+            <div>
+              <label for="city" class="block text-sm font-medium text-gray-700 mb-2">City</label>
+              <select id="city" name="city" class="w-full form-input py-3 px-4 rounded-lg" required>
+                <option value="" disabled selected>Select City</option>
+                <option value="karachi">Karachi</option>
+                <option value="islamabad">Islamabad</option>
+                <option value="lahore">Lahore</option>
+                <option value="rawalpindi">Rawalpindi</option>
+                <option value="peshawar">Peshawar</option>
+                <option value="quetta">Quetta</option>
+                <option value="faisalabad">Faisalabad</option>
+              </select>
+            </div>
+
+            <div class="pt-4">
+              <button type="submit" class="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center">
+                <i class="fas fa-paper-plane mr-2"></i>
+                Place Order Now
+              </button>
+            </div>
+
+            <!-- Success message container -->
+            <div id="success-message" class="hidden mt-4 text-green-600 font-semibold flex items-center space-x-2">
+              <span class="text-2xl">✅</span>
+              <span>Order Placed Successfully</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12 mt-20">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">PakWorkerConnect</h3>
+          <p class="text-gray-400 mb-4">
+            Connecting professional workers with customers across Pakistan for reliable and efficient service delivery.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-4">Services</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Food Delivery</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Ride Services</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cleaning Services</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Repair Services</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-4">Cities</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Karachi</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Islamabad</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Lahore</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Other Cities</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-4">Contact</h4>
+          <ul class="space-y-2">
+            <li class="flex items-center">
+              <i class="fas fa-phone mr-2 text-gray-400"></i>
+              <span class="text-gray-400">+92 300 1234567</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-envelope mr-2 text-gray-400"></i>
+              <span class="text-gray-400">info@pakworkerconnect.com</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+              <span class="text-gray-400">Islamabad, Pakistan</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>© 2023 PakWorkerConnect. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const orderForm = document.getElementById('order-form');
+    const successMessage = document.getElementById('success-message');
+
+    orderForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Show success message
+      successMessage.classList.remove('hidden');
+
+      // Optionally, scroll to the message
+      successMessage.scrollIntoView({ behavior: 'smooth' });
+
+      // Reset form fields
+      orderForm.reset();
+
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        successMessage.classList.add('hidden');
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
