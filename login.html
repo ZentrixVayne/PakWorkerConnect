@@ -121,16 +121,33 @@
         </div>
     </footer>
 
-    <script>
-        // Handle form submission
-        const loginForm = document.getElementById('login-form');
-        if (loginForm) {
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Login successful! Welcome back to PakWorkerConnect.');
-                loginForm.reset();
-            });
-        }
-    </script>
+   <script>
+    // Handle form submission
+    const signupForm = document.getElementById('signup-form');
+
+    // Message display element bana lo
+    const successMessage = document.createElement("p");
+    successMessage.className = "text-green-600 font-semibold mt-4 text-center hidden";
+    successMessage.innerText = "✅ Signed up successfully!";
+    signupForm.parentNode.appendChild(successMessage);
+
+    if (signupForm) {
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Message ko show karo
+            successMessage.classList.remove("hidden");
+
+            // Form reset karo
+            signupForm.reset();
+
+            // 3 second baad message hide kar do
+            setTimeout(() => {
+                successMessage.classList.add("hidden");
+            }, 3000);
+        });
+    }
+</script>
 </body>
 </html>
+
