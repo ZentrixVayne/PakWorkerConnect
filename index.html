@@ -1288,7 +1288,239 @@
 
 </script>
 
+<style>
+  #pakworker-chatbot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    font-family: 'Arial', sans-serif;
+  }
+
+  #chatbot-toggle {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10001;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  #chatbot-toggle:hover {
+    transform: scale(1.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+
+  #chat-window {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 380px;
+    height: 500px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.98) 100%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f0f8ff'/%3E%3Ccircle cx='20' cy='20' r='8' fill='%23007bff' opacity='0.1'/%3E%3Ccircle cx='70' cy='30' r='12' fill='%230056b3' opacity='0.08'/%3E%3Ccircle cx='40' cy='70' r='10' fill='%23007bff' opacity='0.12'/%3E%3C/svg%3E");
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.3);
+    overflow: hidden;
+    color: #007bff;
+    display: flex;
+    flex-direction: column;
+    clip-path: circle(30px at calc(100% - 40px) calc(100% - 40px));
+    transform-origin: bottom right;
+    transition: clip-path 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10000;
+  }
+  #chat-window.open {
+    clip-path: circle(1000px at calc(100% - 40px) calc(100% - 40px));
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Header */
+  #chat-window > .header {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    padding: 18px 20px;
+    border-radius: 20px 20px 0 0;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    user-select: none;
+  }
+
+  /* Messages */
+  #chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: transparent;
+  }
+
+  .user-msg {
+    color: #2d3748;
+    background: #f7fafc;
+    padding: 14px;
+    border-radius: 14px;
+    border-right: 5px solid #e2e8f0;
+    margin-left: 25px;
+    font-size: 15px;
+    line-height: 1.5;
+    align-self: flex-end;
+    max-width: 80%;
+    word-wrap: break-word;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+
+  .bot-msg {
+    color: #007bff;
+    background: rgba(0,123,255,0.12);
+    padding: 14px;
+    border-radius: 14px;
+    border-left: 5px solid #007bff;
+    margin-right: 25px;
+    font-size: 15px;
+    line-height: 1.5;
+    align-self: flex-start;
+    max-width: 80%;
+    word-wrap: break-word;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+
+  /* Suggested questions */
+  #suggested-questions {
+    padding: 18px 20px;
+    background: rgba(0,123,255,0.07);
+    border-radius: 0 0 20px 20px;
+    border-top: 1px solid rgba(0,0,0,0.12);
+  }
+  #suggested-questions > div {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 12px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+  #suggested-questions button {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border: none;
+    border-radius: 24px;
+    padding: 12px 18px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    transition: background 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+  }
+  #suggested-questions button:hover {
+    background: linear-gradient(135deg, #0056b3, #003d80);
+    transform: scale(1.05);
+  }
+</style>
+
+<div id="pakworker-chatbot" aria-live="polite" aria-atomic="true">
+  <button id="chatbot-toggle" aria-label="Toggle chat window" title="Open chat">🤖</button>
+
+  <div id="chat-window" role="region" aria-label="PakWorkerConnect AI chat window">
+    <div class="header">
+      🤖 PakWorkerConnect AI
+    </div>
+    <div id="chat-messages">
+      <div class="bot-msg">
+        <strong>Hello!</strong> I'm here to help you understand PakWorkerConnect. Ask me anything! 👋
+      </div>
+    </div>
+    <div id="suggested-questions">
+      <div>QUICK QUESTIONS:</div>
+      <button onclick="askQuestion(0)">What is this website used for?</button>
+      <button onclick="askQuestion(1)">How to use this website?</button>
+      <button onclick="askQuestion(2)">How do the functions work?</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const toggleBtn = document.getElementById('chatbot-toggle');
+  const chatWindow = document.getElementById('chat-window');
+  const chatMessages = document.getElementById('chat-messages');
+
+  const chatData = {
+    questions: [
+      "What is this website used for?",
+      "How to use this website?",
+      "How do the functions work?"
+    ],
+    answers: [
+      "This website connects underrated service providers like delivery riders, food services, cleaning professionals, repair technicians, and other local service workers with customers who need their services. It's a platform that helps service providers get more visibility and customers find reliable local services easily.",
+      "First, you can create an account by signing up. As a customer, you can browse services, place orders, and connect directly with service providers via phone number. As a worker, you can register your service, wait for orders, and build your client base. The phone number exchange feature ensures direct communication between both parties.",
+      "The website is built using HTML, CSS, and JavaScript for the frontend. It features user authentication, service listings, order management, and direct communication through phone numbers. Developed by Arshman Anil and Muhammad Izhan, it focuses on simplicity and connecting local service providers with customers efficiently."
+    ]
+  };
+
+  toggleBtn.addEventListener('click', () => {
+    if (chatWindow.classList.contains('open')) {
+      chatWindow.classList.remove('open');
+    } else {
+      chatWindow.classList.add('open');
+      scrollToBottom();
+    }
+  });
+
+  function askQuestion(index) {
+    // Add user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'user-msg';
+    userMsg.textContent = chatData.questions[index];
+    chatMessages.appendChild(userMsg);
+    scrollToBottom();
+
+    // Add bot typing indicator
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'bot-msg';
+    typingIndicator.textContent = '...';
+    chatMessages.appendChild(typingIndicator);
+    scrollToBottom();
+
+    // After delay, replace typing with answer
+    setTimeout(() => {
+      chatMessages.removeChild(typingIndicator);
+      const botMsg = document.createElement('div');
+      botMsg.className = 'bot-msg';
+      botMsg.textContent = chatData.answers[index];
+      chatMessages.appendChild(botMsg);
+      scrollToBottom();
+    }, 1500);
+  }
+
+  function scrollToBottom() {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+</script>
+
+
 </body>
 
 </html>
+
 
